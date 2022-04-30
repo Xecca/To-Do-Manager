@@ -20,7 +20,8 @@ class TasksStorage: TasksStorageProtocol {
             Task(title: "Return the loat to Arnold", type: .important, status: .completed),
             Task(title: "Buy a new vacuum cleaner", type: .normal, status: .completed),
             Task(title: "Give floweres to my wife", type: .important, status: .planned),
-            Task(title: "Call to parents", type: .important, status: .planned)
+            Task(title: "Call to parents", type: .important, status: .planned),
+            Task(title: "Invite to the party Dolph, Jacky, Leonardo, Uill and Bruce", type: .important, status: .planned)
         ]
         
         return testTasks

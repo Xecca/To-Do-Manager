@@ -50,23 +50,26 @@
                                 </tableViewCellContentView>
                             </tableViewCell>
                             <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="taskCellStack" id="PJ8-jM-lh8" customClass="TaskCell" customModule="To_Do_Manager" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="92.5" width="414" height="21"/>
+                                <rect key="frame" x="0.0" y="92.5" width="414" height="43"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="PJ8-jM-lh8" id="OJe-05-T8A">
-                                    <rect key="frame" x="0.0" y="0.0" width="414" height="21"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="43"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <stackView opaque="NO" contentMode="scaleToFill" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="ZPa-Ov-Zbh">
-                                            <rect key="frame" x="0.0" y="0.0" width="414" height="21"/>
+                                            <rect key="frame" x="20" y="11" width="374" height="21"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dTS-yF-gW1">
-                                                    <rect key="frame" x="0.0" y="0.0" width="41.5" height="21"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="20" height="21"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="20" id="pXs-Hf-E7h"/>
+                                                    </constraints>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yw1-7k-kag">
-                                                    <rect key="frame" x="51.5" y="0.0" width="362.5" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yw1-7k-kag">
+                                                    <rect key="frame" x="30" y="0.0" width="344" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -75,10 +78,10 @@
                                         </stackView>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="ZPa-Ov-Zbh" firstAttribute="leading" secondItem="OJe-05-T8A" secondAttribute="leading" id="9bQ-Dl-tw4"/>
-                                        <constraint firstAttribute="bottom" secondItem="ZPa-Ov-Zbh" secondAttribute="bottom" id="Fan-j9-lBX"/>
-                                        <constraint firstItem="ZPa-Ov-Zbh" firstAttribute="top" secondItem="OJe-05-T8A" secondAttribute="top" id="HUZ-ft-pJc"/>
-                                        <constraint firstAttribute="trailing" secondItem="ZPa-Ov-Zbh" secondAttribute="trailing" id="nZe-CR-c7a"/>
+                                        <constraint firstItem="ZPa-Ov-Zbh" firstAttribute="top" secondItem="OJe-05-T8A" secondAttribute="topMargin" id="CX6-cJ-8ny"/>
+                                        <constraint firstAttribute="trailingMargin" secondItem="ZPa-Ov-Zbh" secondAttribute="trailing" id="KWU-YY-VqT"/>
+                                        <constraint firstAttribute="bottomMargin" secondItem="ZPa-Ov-Zbh" secondAttribute="bottom" id="qsx-wH-etg"/>
+                                        <constraint firstItem="ZPa-Ov-Zbh" firstAttribute="leading" secondItem="OJe-05-T8A" secondAttribute="leadingMargin" id="x4H-4e-kY3"/>
                                     </constraints>
                                 </tableViewCellContentView>
                                 <connections>
