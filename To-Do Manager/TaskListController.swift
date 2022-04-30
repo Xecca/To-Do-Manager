@@ -11,6 +11,7 @@ class TaskListController: UITableViewController {
 
     var tasksStorage: TasksStorageProtocol = TasksStorage()
     var tasks: [TaskPriority: [TaskProtocol]] = [:]
+    var tasksStatusPosition: [TaskStatus] = [.planned, .completed]
     
     var sectionsTypesPosition: [TaskPriority] = [.important, .normal]
     
@@ -37,7 +38,10 @@ class TaskListController: UITableViewController {
         
         for (taskGroupPriority, tasksGroup) in tasks {
             tasks[taskGroupPriority] = tasksGroup.sorted { task1, task2 in
-                task1.status.rawValue < task2.status.rawValue
+                let taskFirstPosition = tasksStatusPosition.firstIndex(of: task1.status) ?? 0
+                let taskSecondPosition = tasksStatusPosition.firstIndex(of: task2.status) ?? 0
+                
+                return taskFirstPosition < taskSecondPosition
             }
         }
     }
