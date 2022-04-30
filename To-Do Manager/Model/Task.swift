@@ -14,7 +14,7 @@ enum TaskPriority {
 }
 
 // Task's condition/status
-enum TaskStatus {
+enum TaskStatus: Int {
     case planned
     case completed
 }

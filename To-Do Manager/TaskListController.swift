@@ -34,6 +34,12 @@ class TaskListController: UITableViewController {
         tasksStorage.loadTasks().forEach { task in
             tasks[task.type]?.append(task)
         }
+        
+        for (taskGroupPriority, tasksGroup) in tasks {
+            tasks[taskGroupPriority] = tasksGroup.sorted { task1, task2 in
+                task1.status.rawValue < task2.status.rawValue
+            }
+        }
     }
     
     // MARK: - Table view data source
