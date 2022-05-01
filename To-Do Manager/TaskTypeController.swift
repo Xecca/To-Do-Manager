@@ -16,13 +16,12 @@ class TaskTypeController: UITableViewController {
         (type: .important, title: "Important", description: "This type of task is the most priority for execution. All of the important tasks display on the top of task list."),
         (type: .normal, title: "Current", description: "The task with a normal priority.")
     ]
-    
     // 3. выбранный приоритет
     var selectedType: TaskPriority = .normal
+    var doAfterTypeSelected: ((TaskPriority) -> Void)?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
         // 1. получение значения типа UINib, соответствующее xib-файлу кастомной ячейки
         let cellTypeNib = UINib(nibName: "TaskTypeCell", bundle: nil)
         // 2. регистрация кастомной ячейки в табличном представлении
@@ -69,6 +68,15 @@ class TaskTypeController: UITableViewController {
         return cell
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // ПОЛучаем выбранный тип
+        let selectedType = taskTypesInformation[indexPath.row].type
+        // вызов обработчика
+        doAfterTypeSelected?(selectedType)
+        // переход к предыдущему экрану
+        navigationController?.popViewController(animated: true)
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {

@@ -191,6 +191,7 @@ class TaskListController: UITableViewController {
         // перезагружаем секцию таблицы
         tableView.reloadSections(IndexSet(arrayLiteral: indexPath.section), with: .automatic)
     }
+    
     override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         // получаем данные о задаче, которую необходимо перевести в статус "запланирована"
         let taskType = sectionsTypesPosition[indexPath.section]
@@ -209,6 +210,18 @@ class TaskListController: UITableViewController {
         // Возвращаем настроенный объект
         return UISwipeActionsConfiguration(actions: [actionSwipeInstance])
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toCreateScreen" {
+            let destination = segue.destination as! TaskEditController
+            destination.doAfterEdit = { [unowned self] title, type, status in
+                let newTask = Task(title: title, type: type, status: status)
+                tasks[type]?.append(newTask)
+                tableView.reloadData()
+            }
+        }
+    }
+    
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
