@@ -10,9 +10,19 @@ import UIKit
 class TaskListController: UITableViewController {
 
     var tasksStorage: TasksStorageProtocol = TasksStorage()
-    var tasks: [TaskPriority: [TaskProtocol]] = [:]
     var tasksStatusPosition: [TaskStatus] = [.planned, .completed]
-    
+    var tasks: [TaskPriority: [TaskProtocol]] = [:] {
+        didSet {
+            for (taskGroupPriority, tasksGroup) in tasks {
+                tasks[taskGroupPriority] = tasksGroup.sorted { task1, task2 in
+                    let taskFirstPosition = tasksStatusPosition.firstIndex(of: task1.status) ?? 0
+                    let taskSecondPosition = tasksStatusPosition.firstIndex(of: task2.status) ?? 0
+                    
+                    return taskFirstPosition < taskSecondPosition
+                }
+            }
+        }
+    }
     var sectionsTypesPosition: [TaskPriority] = [.important, .normal]
     
     override func viewDidLoad() {
@@ -34,15 +44,6 @@ class TaskListController: UITableViewController {
         
         tasksStorage.loadTasks().forEach { task in
             tasks[task.type]?.append(task)
-        }
-        
-        for (taskGroupPriority, tasksGroup) in tasks {
-            tasks[taskGroupPriority] = tasksGroup.sorted { task1, task2 in
-                let taskFirstPosition = tasksStatusPosition.firstIndex(of: task1.status) ?? 0
-                let taskSecondPosition = tasksStatusPosition.firstIndex(of: task2.status) ?? 0
-                
-                return taskFirstPosition < taskSecondPosition
-            }
         }
     }
     
@@ -142,6 +143,40 @@ class TaskListController: UITableViewController {
         return title
     }
 
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        // проверяем существование задачи
+        let taskType = sectionsTypesPosition[indexPath.section]
+        guard let _ = tasks[taskType]?[indexPath.row] else {
+            return
+        }
+        guard tasks[taskType]![indexPath.row].status == .planned else {
+            // убеждаемся, что задача не является выполненной
+            tableView.deselectRow(at: indexPath, animated: true)
+            return
+        }
+        // отмечаем задачу как выполненную
+        tasks[taskType]![indexPath.row].status = .completed
+        // перезагружаем секцию таблицы
+        tableView.reloadSections(IndexSet(arrayLiteral: indexPath.section), with: .automatic)
+    }
+    override func tableView(_ tableView: UITableView, leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
+        // получаем данные о задаче, которую необходимо перевести в статус "запланирована"
+        let taskType = sectionsTypesPosition[indexPath.section]
+        guard let _ = tasks[taskType]?[indexPath.row] else {
+            return nil
+        }
+        // проверяем, что задача имеет статус "выполнено"
+        guard tasks[taskType]![indexPath.row].status == .completed else {
+            return nil
+        }
+        // создаем действие для изменения статуса
+        let actionSwipeInstance = UIContextualAction(style: .normal, title: "Incompleted") { _, _, _ in
+            self.tasks[taskType]![indexPath.row].status = .planned
+            self.tableView.reloadSections(IndexSet(arrayLiteral: indexPath.section), with: .automatic)
+        }
+        // Возвращаем настроенный объект
+        return UISwipeActionsConfiguration(actions: [actionSwipeInstance])
+    }
     /*
     // Override to support conditional editing of the table view.
     override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
