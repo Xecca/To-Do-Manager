@@ -29,6 +29,8 @@ class TaskListController: UITableViewController {
         super.viewDidLoad()
 
         loadTasks()
+        // кнопка активации режима редактирования
+        navigationItem.leftBarButtonItem = editButtonItem
         
         // Uncomment the following line to preserve selection between presentations
         // self.clearsSelectionOnViewWillAppear = false
@@ -70,6 +72,14 @@ class TaskListController: UITableViewController {
 //        return getConfiguredTaskCell_constraints(for: indexPath)
         // cell based on stack view
         return getConfiguredTaskCell_stack(for: indexPath)
+    }
+    
+    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        let taskType = sectionsTypesPosition[indexPath.section]
+        // Удаляем задачу
+        tasks[taskType]?.remove(at: indexPath.row)
+        // Удаляем строку, соответствующую задаче
+        tableView.deleteRows(at: [indexPath], with: .automatic)
     }
     
     private func getConfiguredTaskCell_constraints(for indexPath: IndexPath) -> UITableViewCell {
