@@ -16,6 +16,10 @@
 		95C92726281D7A1F00F7738E /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C92725281D7A1E00F7738E /* Task.swift */; };
 		95C92728281D7C1100F7738E /* TaskStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C92727281D7C1100F7738E /* TaskStorage.swift */; };
 		95C9272C281D8DE000F7738E /* TaskCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C9272B281D8DE000F7738E /* TaskCell.swift */; };
+		95C9272E281EC29500F7738E /* TaskEditController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C9272D281EC29400F7738E /* TaskEditController.swift */; };
+		95C92730281ECAC300F7738E /* TaskTypeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C9272F281ECAC300F7738E /* TaskTypeController.swift */; };
+		95C92733281ECCC900F7738E /* TaskTypeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 95C92731281ECCC900F7738E /* TaskTypeCell.swift */; };
+		95C92734281ECCC900F7738E /* TaskTypeCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 95C92732281ECCC900F7738E /* TaskTypeCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +34,10 @@
 		95C92725281D7A1E00F7738E /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		95C92727281D7C1100F7738E /* TaskStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskStorage.swift; sourceTree = "<group>"; };
 		95C9272B281D8DE000F7738E /* TaskCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskCell.swift; sourceTree = "<group>"; };
+		95C9272D281EC29400F7738E /* TaskEditController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskEditController.swift; sourceTree = "<group>"; };
+		95C9272F281ECAC300F7738E /* TaskTypeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTypeController.swift; sourceTree = "<group>"; };
+		95C92731281ECCC900F7738E /* TaskTypeCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TaskTypeCell.swift; sourceTree = "<group>"; };
+		95C92732281ECCC900F7738E /* TaskTypeCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TaskTypeCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -67,6 +75,8 @@
 				95C9270E281D766600F7738E /* AppDelegate.swift */,
 				95C92710281D766600F7738E /* SceneDelegate.swift */,
 				95C92714281D766600F7738E /* Main.storyboard */,
+				95C9272F281ECAC300F7738E /* TaskTypeController.swift */,
+				95C9272D281EC29400F7738E /* TaskEditController.swift */,
 				95C92722281D78CF00F7738E /* TaskListController.swift */,
 				95C92717281D766800F7738E /* Assets.xcassets */,
 				95C92719281D766800F7738E /* LaunchScreen.storyboard */,
@@ -96,6 +106,8 @@
 			isa = PBXGroup;
 			children = (
 				95C9272B281D8DE000F7738E /* TaskCell.swift */,
+				95C92731281ECCC900F7738E /* TaskTypeCell.swift */,
+				95C92732281ECCC900F7738E /* TaskTypeCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -160,6 +172,7 @@
 			files = (
 				95C9271B281D766800F7738E /* LaunchScreen.storyboard in Resources */,
 				95C92718281D766800F7738E /* Assets.xcassets in Resources */,
+				95C92734281ECCC900F7738E /* TaskTypeCell.xib in Resources */,
 				95C92716281D766600F7738E /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -175,8 +188,11 @@
 				95C9270F281D766600F7738E /* AppDelegate.swift in Sources */,
 				95C92711281D766600F7738E /* SceneDelegate.swift in Sources */,
 				95C92728281D7C1100F7738E /* TaskStorage.swift in Sources */,
+				95C92730281ECAC300F7738E /* TaskTypeController.swift in Sources */,
 				95C9272C281D8DE000F7738E /* TaskCell.swift in Sources */,
 				95C92723281D78CF00F7738E /* TaskListController.swift in Sources */,
+				95C9272E281EC29500F7738E /* TaskEditController.swift in Sources */,
+				95C92733281ECCC900F7738E /* TaskTypeCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
