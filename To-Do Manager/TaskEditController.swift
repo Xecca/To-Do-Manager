@@ -48,42 +48,34 @@ class TaskEditController: UITableViewController {
         return 3
     }
     
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if segue.identifier == "toTaskTypeScreen" {
-            // ссылка на контроллер назначения
-            let destination = segue.destination as! TaskTypeController
-            // передача выбранного типа
-            destination.selectedType = taskType
-            // передача обработчика выбора типа
-            destination.doAfterTypeSelected = { [unowned self] selectedType in
-                taskType = selectedType
-                // обновляем метку с текущим типом
-                taskTypeLabel.text = taskTitles[taskType]
-            }
-        }
-    }
-    
     @IBAction func saveTask(_ sender: UIBarButtonItem) {
         // получаем актуальные значения
         let title = taskTitle.text ?? ""
-        let type = taskType
-        let status: TaskStatus = taskStatusSwitch.isOn ? .completed : .planned
-        
-        // вызываем обработчик
-        doAfterEdit?(title, type, status)
-        // возвращаемся к предыдущему экрану
-        navigationController?.popViewController(animated: true)
+        if title.isEmpty {
+            let alertController = UIAlertController(title: "No title!", message: "Your title of task is empty!", preferredStyle: .alert)
+            let action = UIAlertAction(title: "OK", style: .default) { _ in
+                return
+            }
+            alertController.addAction(action)
+            self.present(alertController, animated: true)
+        } else {
+            let type = taskType
+            let status: TaskStatus = taskStatusSwitch.isOn ? .completed : .planned
+            
+            // вызываем обработчик
+            doAfterEdit?(title, type, status)
+            // возвращаемся к предыдущему экрану
+            navigationController?.popViewController(animated: true)
+        }
     }
 
-    /*
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-
-        // Configure the cell...
-
-        return cell
-    }
-    */
+//    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
+//
+//        // Configure the cell...
+//
+//        return cell
+//    }
 
     /*
     // Override to support conditional editing of the table view.
@@ -129,5 +121,20 @@ class TaskEditController: UITableViewController {
         // Pass the selected object to the new view controller.
     }
     */
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "toTaskTypeScreen" {
+            // ссылка на контроллер назначения
+            let destination = segue.destination as! TaskTypeController
+            // передача выбранного типа
+            destination.selectedType = taskType
+            // передача обработчика выбора типа
+            destination.doAfterTypeSelected = { [unowned self] selectedType in
+                taskType = selectedType
+                // обновляем метку с текущим типом
+                taskTypeLabel.text = taskTitles[taskType]
+            }
+        }
+    }
 
 }

@@ -21,6 +21,13 @@ class TaskListController: UITableViewController {
                     return taskFirstPosition < taskSecondPosition
                 }
             }
+            // сохранение задач
+            var savingArray: [TaskProtocol] = []
+            
+            tasks.forEach { _, value in
+                savingArray += value
+            }
+            tasksStorage.saveTasks(savingArray)
         }
     }
     var sectionsTypesPosition: [TaskPriority] = [.important, .normal]
@@ -38,6 +45,19 @@ class TaskListController: UITableViewController {
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
         // self.navigationItem.rightBarButtonItem = self.editButtonItem
     }
+    
+    // Получение списка задач, их разбор и установка в свойство tasks
+    func setTasks(_ tasksCollection: [TaskProtocol]) {
+        // подготовка коллекции с задачами
+        // будем использовать только те задачи, для которых определена секция
+        sectionsTypesPosition.forEach { taskType in
+            tasks[taskType] = []
+        }
+        // заргрузка и разбор задач из хранилища
+        tasksCollection.forEach { task in
+            tasks[task.type]?.append(task)
+        }
+    }
 
     private func loadTasks() {
         sectionsTypesPosition.forEach { taskType in
@@ -52,6 +72,7 @@ class TaskListController: UITableViewController {
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
+        print("numberOfSctions")
         return tasks.count
     }
 
@@ -60,6 +81,10 @@ class TaskListController: UITableViewController {
         let taskType = sectionsTypesPosition[section]
         guard let currentTasksType = tasks[taskType] else {
             return 0
+        }
+        
+        if currentTasksType.count == 0 {
+            print("In section \(section) no tasks")
         }
         
         return currentTasksType.count
@@ -71,7 +96,12 @@ class TaskListController: UITableViewController {
         // cell based on constraints
 //        return getConfiguredTaskCell_constraints(for: indexPath)
         // cell based on stack view
-        return getConfiguredTaskCell_stack(for: indexPath)
+        
+        let cell = getConfiguredTaskCell_stack(for: indexPath)
+        
+        print("entered into cellForRowAt \(indexPath.row)")
+        
+        return cell
     }
     
     override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
